@@ -8,10 +8,27 @@
 import SwiftUI
 
 @main
-struct Test_Plot_Threaded_ChartsApp: App {
+struct Test_PlotApp: App {
+    
+    @StateObject var plotData = PlotClass()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ContentView()
+                    .environmentObject(plotData)
+                    .tabItem {
+                        Text("Plot")
+                    }
+                TextView()
+                    .environmentObject(plotData)
+                    .tabItem {
+                        Text("Text")
+                    }
+                            
+                            
+            }
+            
         }
     }
 }
