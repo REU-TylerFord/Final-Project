@@ -45,6 +45,8 @@ struct ContentView: View {
                             
                             
                         }
+                        .chartYScale(domain: [ plotData.plotArray[selector].changingPlotParameters.yMin ,  plotData.plotArray[selector].changingPlotParameters.yMax ])
+                        .chartXScale(domain: [ plotData.plotArray[selector].changingPlotParameters.xMin ,  plotData.plotArray[selector].changingPlotParameters.xMax ])
                         .chartYAxis {
                             AxisMarks(position: .leading)
                         }

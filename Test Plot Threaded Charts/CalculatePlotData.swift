@@ -15,12 +15,12 @@ class CalculatePlotData: ObservableObject {
     var theText = ""
     
 
-    @MainActor func setThePlotParameters(color: String, xLabel: String, yLabel: String, title: String) {
+    @MainActor func setThePlotParameters(color: String, xLabel: String, yLabel: String, title: String, xMin: Double, xMax: Double, yMin:Double, yMax:Double) {
         //set the Plot Parameters
-        plotDataModel!.changingPlotParameters.yMax = 10.0
-        plotDataModel!.changingPlotParameters.yMin = -5.0
-        plotDataModel!.changingPlotParameters.xMax = 10.0
-        plotDataModel!.changingPlotParameters.xMin = -5.0
+        plotDataModel!.changingPlotParameters.yMax = yMax
+        plotDataModel!.changingPlotParameters.yMin = yMin
+        plotDataModel!.changingPlotParameters.xMax = xMax
+        plotDataModel!.changingPlotParameters.xMin = xMin
         plotDataModel!.changingPlotParameters.xLabel = xLabel
         plotDataModel!.changingPlotParameters.yLabel = yLabel
         
@@ -45,8 +45,6 @@ class CalculatePlotData: ObservableObject {
         
         theText = "y = x\n"
         
-        await setThePlotParameters(color: "Red", xLabel: "x", yLabel: "y", title: "y = x")
-        
         await resetCalculatedTextOnMainThread()
         
         
@@ -68,6 +66,8 @@ class CalculatePlotData: ObservableObject {
         
         }
         
+        await setThePlotParameters(color: "Red", xLabel: "x", yLabel: "y", title: "y = x", xMin: -4.0, xMax: 24.0, yMin: -4.0, yMax: 24.0)
+        
         await appendDataToPlot(plotData: plotData)
         await updateCalculatedTextOnMainThread(theText: theText)
         
@@ -78,9 +78,7 @@ class CalculatePlotData: ObservableObject {
     func ploteToTheMinusX() async
     {
         
-        //set the Plot Parameters
         
-        await setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "y = exp(-x)", title: "y = exp(-x)")
         
         await resetCalculatedTextOnMainThread()
         
@@ -99,6 +97,9 @@ class CalculatePlotData: ObservableObject {
             plotData.append(contentsOf: [dataPoint])
             theText += "x = \(x), y = \(y)\n"
         }
+        
+        //set the Plot Parameters
+        await setThePlotParameters(color: "Blue", xLabel: "x", yLabel: "y = exp(-x)", title: "y = exp(-x)", xMin: -4.0, xMax: 12.0, yMin: -1.0, yMax: 8)
         
         await appendDataToPlot(plotData: plotData)
         await updateCalculatedTextOnMainThread(theText: theText)
