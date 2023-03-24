@@ -60,35 +60,10 @@ struct ContentView: View {
                 
             }
             .padding()
-      
-//            CorePlot(dataForPlot: $plotData.plotArray[selector].plotData, changingPlotParameters: $plotData.plotArray[selector].changingPlotParameters)
-//                .setPlotPadding(left: 10)
-//                .setPlotPadding(right: 10)
-//                .setPlotPadding(top: 10)
-//                .setPlotPadding(bottom: 10)
-//                .padding()
+    
             
             Divider()
-            /*
-                     CorePlot(dataForPlot: $plotData.plotArray[0].plotData, changingPlotParameters: $plotData.plotArray[0].changingPlotParameters)
-                         .setPlotPadding(left: 10)
-                         .setPlotPadding(right: 10)
-                         .setPlotPadding(top: 10)
-                         .setPlotPadding(bottom: 10)
-                         .padding()
-                     
-                     Divider()
-                     */
-   /*
-            CorePlot(dataForPlot: $plotData.plotArray[1].plotData, changingPlotParameters: $plotData.plotArray[1].changingPlotParameters)
-                .setPlotPadding(left: 10)
-                .setPlotPadding(right: 10)
-                .setPlotPadding(top: 10)
-                .setPlotPadding(bottom: 10)
-                .padding()
-            
-            Divider()
-            */
+        
             HStack{
                 
                 HStack(alignment: .center) {
