@@ -13,7 +13,7 @@ import Charts
 struct ContentView: View {
     @EnvironmentObject var plotData :PlotClass
     
-    @ObservedObject private var calculator = CalculatePlotData()
+    @StateObject private var calculator = CalculatePlotData()
     @State var isChecked:Bool = false
     @State var tempInput = ""
     
@@ -26,7 +26,7 @@ struct ContentView: View {
             Group{
                 
                 HStack(alignment: .center, spacing: 0) {
-                    //Text("Height (cm)")
+                    
                     Text($plotData.plotArray[selector].changingPlotParameters.yLabel.wrappedValue)
                         .rotationEffect(Angle(degrees: -90))
                         .foregroundColor(.red)
