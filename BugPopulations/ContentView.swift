@@ -15,7 +15,7 @@ struct ContentView: View {
     
     @StateObject private var calculator = CalculatePlotData()
     @State var isChecked:Bool = false
-    @State var tempInput = ""
+    @State var muInput = "2.0"
     
     @State var selector = 0
 
@@ -36,7 +36,7 @@ struct ContentView: View {
                             LineMark(
                                 x: .value("Position", $0.xVal),
                                 y: .value("Height", $0.yVal)
-                                    
+
                             )
                             .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
                             PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
@@ -67,10 +67,10 @@ struct ContentView: View {
             HStack{
                 
                 HStack(alignment: .center) {
-                    Text("temp:")
+                    Text("mu:")
                         .font(.callout)
                         .bold()
-                    TextField("temp", text: $tempInput)
+                    TextField("mu", text: $muInput)
                         .padding()
                 }.padding()
                 
@@ -84,7 +84,7 @@ struct ContentView: View {
             
             
             HStack{
-                Button("exp(-x)", action: {
+                Button("One-Cycle", action: {
                     
                     Task.init{
                     
@@ -103,11 +103,11 @@ struct ContentView: View {
             }
             
             HStack{
-                Button("x", action: { Task.init{
+                Button("Bifurcation", action: { Task.init{
                     
                     self.selector = 1
                     
-                    await self.calculate2()
+                    await self.bifurcation()
                     
                     
                 }
@@ -148,17 +148,20 @@ struct ContentView: View {
                 taskGroup.addTask {
 
         
-        var temp = 0.0
+                    let mu = await Double(muInput)!
         
         
         
         //Calculate the new plotting data and place in the plotDataModel
-        await calculator.ploteToTheMinusX()
+                    await calculator.calculateOneCycle(mu: mu)
         
                     // This forces a SwiftUI update. Force a SwiftUI update.
         //await self.plotData.objectWillChange.send()
              
                     await setObjectWillChange(theObject: self.plotData)
+                    
+                    
+                
                 }
 
                 
@@ -177,7 +180,7 @@ struct ContentView: View {
     
     /// calculate
     /// Function accepts the command to start the calculation from the GUI
-    func calculate2() async {
+    func bifurcation() async {
         
         
         //pass the plotDataModel to the Calculator
@@ -195,12 +198,12 @@ struct ContentView: View {
                 taskGroup.addTask {
 
         
-        var temp = 0.0
+        //var temp = 0.0
         
         
         
         //Calculate the new plotting data and place in the plotDataModel
-        await calculator.plotYEqualsX()
+                    await calculator.bifurcationCaclulation(muMin: 1.0, muMax: 4.0, step: 0.005)
                   
                     // This forces a SwiftUI update. Force a SwiftUI update.
        // await self.plotData.objectWillChange.send()

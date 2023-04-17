@@ -1,5 +1,5 @@
 //
-//  Test_Plot_Threaded_ChartsApp.swift
+//  BugPopulationsApp.swift
 //  Test Plot Threaded Charts
 //
 //  Created by Jeff Terry on 8/25/22.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct Test_PlotApp: App {
+struct BugPopulationsApp: App {
     
     @StateObject var plotData = PlotClass()
     
