@@ -14,8 +14,10 @@ struct ContentView: View {
     @EnvironmentObject var plotData :PlotClass
     
     @StateObject private var calculator = CalculatePlotData()
-    @State var isChecked:Bool = false
+    @StateObject private var myPendulum = Pendulum()
+    @State var plotLine:Bool = false
     @State var muInput = "2.0"
+    
     
     @State var selector = 0
 
@@ -33,12 +35,15 @@ struct ContentView: View {
                         .padding()
                     VStack {
                         Chart($plotData.plotArray[selector].plotData.wrappedValue) {
-                            LineMark(
-                                x: .value("Position", $0.xVal),
-                                y: .value("Height", $0.yVal)
+                            if plotLine {
+                                
+                                LineMark(
+                                    x: .value("Position", $0.xVal),
+                                    y: .value("Height", $0.yVal)
 
-                            )
-                            .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                                )
+                                .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
+                            }
                             PointMark(x: .value("Position", $0.xVal), y: .value("Height", $0.yVal))
                             
                             .foregroundStyle($plotData.plotArray[selector].changingPlotParameters.lineColor.wrappedValue)
@@ -74,8 +79,8 @@ struct ContentView: View {
                         .padding()
                 }.padding()
                 
-                Toggle(isOn: $isChecked) {
-                            Text("Display Error")
+                Toggle(isOn: $plotLine) {
+                            Text("plot Line")
                         }
                 .padding()
                 
@@ -87,7 +92,7 @@ struct ContentView: View {
                 Button("One-Cycle", action: {
                     
                     Task.init{
-                    
+                        self.plotLine = true 
                     self.selector = 0
                     await self.calculate()
                     }
@@ -107,6 +112,8 @@ struct ContentView: View {
                     
                     self.selector = 1
                     
+                    self.plotLine = false
+                    
                     await self.bifurcation()
                     
                     
@@ -118,6 +125,45 @@ struct ContentView: View {
                 .padding()
                 
             }
+            
+            HStack{
+                Button("Pendulum", action: { Task.init{
+                    
+                   // self.selector = 1
+                    
+                    //self.plotLine = false
+                    
+                    await self.pendulumCalculation()
+                    
+                    
+                }
+                }
+                
+                
+                )
+                .padding()
+                
+            }
+            HStack{
+                Button("Potential Energy Graph", action: { Task.init{
+                    
+                   // self.selector = 1
+                    
+                    //self.plotLine = false
+                    
+                    await self.potentialAndKineticEnergyCalculator()
+                    
+                    
+                }
+                }
+                
+                
+                )
+                .padding()
+                
+            }
+            
+            
             
         }
         
@@ -208,7 +254,7 @@ struct ContentView: View {
                     // This forces a SwiftUI update. Force a SwiftUI update.
        // await self.plotData.objectWillChange.send()
                     
-                    await setObjectWillChange(theObject: self.plotData)
+                    
                     
                 }
                 
@@ -221,6 +267,93 @@ struct ContentView: View {
     }
     
 
+    func pendulumCalculation() async {
+        
+            
+            let _ = await withTaskGroup(of:  Void.self) { taskGroup in
+                
+                taskGroup.addTask {
+
+                await myPendulum.singleWaveFunctionFinder(initialThetaPrime: 1.0, numberOfXSteps: 10000, omega: 1.0)
+                
+                   await plotData.plotArray[selector].zeroData()
+                    
+                    for i in await 0..<myPendulum.theta.count{
+                     let dataPoint: (x: Double, y: Double) = await (x: myPendulum.time[i], y: myPendulum.theta[i])
+                     await plotData.plotArray[selector].appendData(dataPoint: [dataPoint])
+                        
+                    }
+                    //set the Plot Parameters
+                    
+              await plotData.plotArray[selector].changingPlotParameters.yMax = 5.0
+              await plotData.plotArray[selector].changingPlotParameters.yMin = -5.0
+              await plotData.plotArray[selector].changingPlotParameters.xMax = 100
+              await plotData.plotArray[selector].changingPlotParameters.xMin = -1.0
+              await plotData.plotArray[selector].changingPlotParameters.xLabel = "time"
+              await plotData.plotArray[selector].changingPlotParameters.yLabel = "theta"
+                    
+
+                    
+                    
+                    await setObjectWillChange(theObject: self.plotData)
+                    
+                    
+                  
+                
+            }
+        }
+    }
+    
+    func potentialAndKineticEnergyCalculator() async {
+        
+            
+            let _ = await withTaskGroup(of:  Void.self) { taskGroup in
+                
+                taskGroup.addTask {
+
+                await myPendulum.singleWaveFunctionFinder(initialThetaPrime: 1.0, numberOfXSteps: 10000, omega: 1.0)
+                
+                   await plotData.plotArray[selector].zeroData()
+                    
+                    for i in await 0..<myPendulum.potentialEnergy.count{
+                     let dataPoint: (x: Double, y: Double) = await (x: myPendulum.time[i], y: myPendulum.potentialEnergy[i])
+                     await plotData.plotArray[selector].appendData(dataPoint: [dataPoint])
+                        
+                    }
+                    //set the Plot Parameters
+                    
+              await plotData.plotArray[selector].changingPlotParameters.yMax = 3.0
+              await plotData.plotArray[selector].changingPlotParameters.yMin = -3.0
+              await plotData.plotArray[selector].changingPlotParameters.xMax = 100
+              await plotData.plotArray[selector].changingPlotParameters.xMin = -1.0
+              await plotData.plotArray[selector].changingPlotParameters.xLabel = "time"
+              await plotData.plotArray[selector].changingPlotParameters.yLabel = "energy"
+                    
+                  
+                    
+                    
+                    await setObjectWillChange(theObject: self.plotData)
+                    
+                    
+                    
+                    
+    
+                
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    
     
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ABD018C729F879E000E619D2 /* Pendulum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD018C629F879E000E619D2 /* Pendulum.swift */; };
+		ABD018C829F879E000E619D2 /* Pendulum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD018C629F879E000E619D2 /* Pendulum.swift */; };
+		ABD018C929F879E000E619D2 /* Pendulum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD018C629F879E000E619D2 /* Pendulum.swift */; };
+		ABDB5DD729F31E24008F5453 /* functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABDB5DD629F31E24008F5453 /* functions.swift */; };
 		D231B92A28B7D41400DF9784 /* BugPopulationsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231B92928B7D41400DF9784 /* BugPopulationsApp.swift */; };
 		D231B92C28B7D41400DF9784 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D231B92B28B7D41400DF9784 /* ContentView.swift */; };
 		D231B92E28B7D41500DF9784 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D231B92D28B7D41500DF9784 /* Assets.xcassets */; };
@@ -58,6 +62,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ABD018C629F879E000E619D2 /* Pendulum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pendulum.swift; sourceTree = "<group>"; };
+		ABDB5DD629F31E24008F5453 /* functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = functions.swift; sourceTree = "<group>"; };
 		D231B92628B7D41400DF9784 /* BugPopulations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BugPopulations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D231B92928B7D41400DF9784 /* BugPopulationsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BugPopulationsApp.swift; sourceTree = "<group>"; };
 		D231B92B28B7D41400DF9784 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -129,11 +135,13 @@
 			children = (
 				D231B92928B7D41400DF9784 /* BugPopulationsApp.swift */,
 				D231B96028B7D67200DF9784 /* CalculatePlotData.swift */,
+				ABD018C629F879E000E619D2 /* Pendulum.swift */,
+				D231B92B28B7D41400DF9784 /* ContentView.swift */,
+				ABDB5DD629F31E24008F5453 /* functions.swift */,
 				D231B97028B7D97300DF9784 /* PlotDataClass.swift */,
 				D231B96428B7D6BF00DF9784 /* ChangingPlotParameters.swift */,
 				D231B96828B7D7E700DF9784 /* PlotDataStruct.swift */,
 				D231B96C28B7D92200DF9784 /* PlotClass.swift */,
-				D231B92B28B7D41400DF9784 /* ContentView.swift */,
 				D231B95428B7D51200DF9784 /* Operators.swift */,
 				D231B95828B7D57600DF9784 /* TextView.swift */,
 				D231B95C28B7D5F000DF9784 /* TextExportDocument.swift */,
@@ -302,10 +310,12 @@
 				D231B92C28B7D41400DF9784 /* ContentView.swift in Sources */,
 				D231B96128B7D67200DF9784 /* CalculatePlotData.swift in Sources */,
 				D231B95928B7D57600DF9784 /* TextView.swift in Sources */,
+				ABD018C729F879E000E619D2 /* Pendulum.swift in Sources */,
 				D231B92A28B7D41400DF9784 /* BugPopulationsApp.swift in Sources */,
 				D231B95528B7D51200DF9784 /* Operators.swift in Sources */,
 				D231B96928B7D7E700DF9784 /* PlotDataStruct.swift in Sources */,
 				D231B96528B7D6BF00DF9784 /* ChangingPlotParameters.swift in Sources */,
+				ABDB5DD729F31E24008F5453 /* functions.swift in Sources */,
 				D231B97128B7D97300DF9784 /* PlotDataClass.swift in Sources */,
 				D231B95D28B7D5F000DF9784 /* TextExportDocument.swift in Sources */,
 				D231B96D28B7D92200DF9784 /* PlotClass.swift in Sources */,
@@ -319,6 +329,7 @@
 				D231B95A28B7D57600DF9784 /* TextView.swift in Sources */,
 				D231B95E28B7D5F000DF9784 /* TextExportDocument.swift in Sources */,
 				D231B93C28B7D41600DF9784 /* BugPopulationsTests.swift in Sources */,
+				ABD018C829F879E000E619D2 /* Pendulum.swift in Sources */,
 				D231B96228B7D67200DF9784 /* CalculatePlotData.swift in Sources */,
 				D231B97228B7D97300DF9784 /* PlotDataClass.swift in Sources */,
 				D231B95628B7D51200DF9784 /* Operators.swift in Sources */,
@@ -339,6 +350,7 @@
 				D231B95728B7D51200DF9784 /* Operators.swift in Sources */,
 				D231B96B28B7D7E700DF9784 /* PlotDataStruct.swift in Sources */,
 				D231B96728B7D6BF00DF9784 /* ChangingPlotParameters.swift in Sources */,
+				ABD018C929F879E000E619D2 /* Pendulum.swift in Sources */,
 				D231B97328B7D97300DF9784 /* PlotDataClass.swift in Sources */,
 				D231B95F28B7D5F000DF9784 /* TextExportDocument.swift in Sources */,
 				D231B96F28B7D92200DF9784 /* PlotClass.swift in Sources */,
